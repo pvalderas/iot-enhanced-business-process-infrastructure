@@ -1,0 +1,18 @@
+spring:
+  application:
+    name: ContextMonitor
+    
+server:
+  port: 8083
+    
+bpController:
+    serviceUrl: http://localhost:8081
+    messagePath: /process/message
+
+eventBus:
+  type: rabbitmq
+  host: localhost
+ 
+contextOntology:
+  name: Warehouse-IoTBPM
+  path: models

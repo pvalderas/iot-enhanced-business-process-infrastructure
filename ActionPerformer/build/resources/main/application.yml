@@ -1,0 +1,18 @@
+spring:
+  application:
+    name: ActionPerformer
+    
+server:
+  port: 8082
+  
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:2222/eureka
+    registerWithEureka: true
+    fetchRegistry: true
+
+eventBus:
+  type: rabbitmq
+  host: localhost
+  
