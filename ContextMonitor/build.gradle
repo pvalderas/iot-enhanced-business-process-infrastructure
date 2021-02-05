@@ -43,6 +43,6 @@ dependencies {
 }
 
 jar{
-    baseName = 'es.upv.pros.pvalderas.contexmonitor'
+    baseName = 'contexmonitor'
     version =  '1.0'
 }

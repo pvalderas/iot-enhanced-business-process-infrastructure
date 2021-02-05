@@ -41,5 +41,5 @@ dependencies {
 }
 
 jar{
-    baseName = 'es.upv.pros.pvalderas.asynchronousmicroservice'
+    baseName = 'asynchronousmicroservice'
 }
