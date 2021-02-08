@@ -22,12 +22,12 @@ This modelling approach is suppoted by a microservice architecture aimed at faci
 
 The main guidelines of the proposed modelling approach are the following:
 
-* 1. A pool is used to represent the whole IoT-enhance business process within an organization.
-* 2. Each IoT device or any other actor of an organization that participate in the process is represented by a lane of this pool.
-* 3. Each IoT devices’ action is defined as a Service Task.
-* 4. The execution of the Service Tasks that represents actions of IoT devices support pull interactions.
-* 5. The physical world is represented by a collapsed pool.
-* 6. Push interactions are represented by flow sequences whose source is the collapsed pool that represent the physical world and whose target is a message start event or a message intermediate catch event defined in a lane.
+1. A pool is used to represent the whole IoT-enhance business process within an organization.
+2. Each IoT device or any other actor of an organization that participate in the process is represented by a lane of this pool.
+3. Each IoT devices’ action is defined as a Service Task.
+4. The execution of the Service Tasks that represents actions of IoT devices support pull interactions.
+5. The physical world is represented by a collapsed pool.
+6. Push interactions are represented by flow sequences whose source is the collapsed pool that represent the physical world and whose target is a message start event or a message intermediate catch event defined in a lane.
 
 
 # The proposed architecture
@@ -96,7 +96,7 @@ eventBus:
   host: localhost
 ```
  
-# Creating a Action Performer
+# Creating an Action Performer
 
 To create a Global Composition Manager you can use Gradle to build the corresponding project in this repository and include it as a dependency of a Spring Boot Application. Then, you just need to annotate the main class with the ```@ActionPerformer``` as presented bellow. Note that the ```@SpringBootApplication``` annotation must be configured to find beans in the ```es.upv.pros.pvalderas.actionperformer.server``` package.
 
@@ -131,7 +131,7 @@ eventBus:
   host: localhost
 ```
 
-# Creating a microservice to support IoT devices controlled by a synchronous REST API
+# Creating a microservice to support an IoT device controlled by a synchronous REST API
 
 To create an IoT microservice that interact with the Action Performed through synchronous REST invocations you can use Gradle to build the corresponding project in this repository and include it as a dependency of a Spring Boot Application. Then, you just need to annotate the main class with the ```@SyncronousMicroservice``` as presented bellow. This annotation must be configured with the class object of the microservice HTTP controller. Note also that the ```@SpringBootApplication``` annotation must be configured to find beans in the ```es.upv.pros.pvalderas.microservice.syncronous``` package as well as the package in which the HTTP controller of the microservice is implemented (```es.upv.pros.pvalderas.truckcontainer``` in the example below). In addition, the ```@EnableDiscoveryClient``` annotation is used to register the microservice in Eureka.
 
@@ -164,7 +164,7 @@ eureka:
       connectionType: synchronous
 ```
 
-# Creating a microservice to support a IoT device controlled by an asynchronous pub/sub broker
+# Creating a microservice to support an IoT device controlled by an asynchronous pub/sub broker
 
 To create an IoT microservice that interact with the Action Performer through a pub/sub communication you can use Gradle to build the corresponding project in this repository and include it as a dependency of a Spring Boot Application. Then, you just need to annotate the main class with the ```@AsyncronousMicroservice``` as presented bellow. This annotation must be configured with the class object of API that describe the operation provided by the microserive. Note also that the ```@SpringBootApplication``` annotation must be configured to find beans in the ```es.upv.pros.pvalderas.microservice.asynchronous``` package as well as the package in which the HTTP controller of the microservice is implemented (```es.upv.pros.pvalderas.refrigerator``` in the example below). In addition, the ```@EnableDiscoveryClient``` annotation is used to register the microservice in Eureka.
 
@@ -206,6 +206,6 @@ bpController:
 ```
 
 
-# Using the infrastructure to create and execute a microservice composition
+# Using the infrastructure to create and execute an IoT-enhanced business proccess
 
 In [iot-enhanced-business-process-example](https://github.com/pvalderas/iot-enhanced-business-process-example) you can find the implementation of a case study based on the process of purchase orders.
