@@ -18,18 +18,6 @@ This work presents a modelling approach based on BPMN that reuses the concepts i
 
 This modelling approach is suppoted by a microservice architecture aimed at facilitating the integration of business processes with the physical world that provides high flexibility to support multiples IoT device technologies, and facilitates evolution and maintenance.
 
-# The modelling approach. Main guidelines
-
-The main guidelines of the proposed modelling approach are the following:
-
-1. A BPMN pool is used to represent the whole IoT-enhance business process within an organization.
-2. Each IoT device or any other actor of an organization that participate in the process is represented by a lane of this pool.
-3. Each IoT device action is defined as a Service Task.
-4. The execution of the Service Tasks that represents actions of IoT devices support pull interactions.
-5. The physical world is represented by a collapsed pool.
-6. Push interactions are represented by flow sequences whose source is the collapsed pool that represent the physical world and whose target is a message start event or a message intermediate catch event defined in a lane.
-
-
 # The proposed architecture
 
 The microservice architecture to support IoT-enhanced business proccess is shown below.
