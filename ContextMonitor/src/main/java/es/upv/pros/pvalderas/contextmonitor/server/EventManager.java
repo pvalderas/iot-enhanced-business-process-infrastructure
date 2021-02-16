@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.Properties;
 import java.util.concurrent.TimeoutException;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.YamlPropertiesFactoryBean;
@@ -65,10 +66,22 @@ public class EventManager {
 					String message=new String(body);
 					try {
 						
-						JSONObject  contextChange = new JSONObject(message);
-						contextModel.addInstance(contextChange.getString("sensorType"), contextChange.getString("id"));
-						contextModel.setContextProp(contextChange.getString("id"), contextChange.getString("property"), contextChange.getString("value"));
-					
+						System.out.println("Received Context Property");
+						System.out.println(message);
+						
+						
+						JSONObject  contextData = new JSONObject(message);
+						String id=contextData.getString("id");
+						contextModel.addInstance("Device", id);
+						contextModel.setContextProp(id, "type", contextData.getString("type"));
+						JSONArray props=contextData.getJSONArray("properties");
+						for(int i=0;i<props.length();i++){
+							contextModel.setContextProp(id, props.getJSONObject(i).getString("name"), props.getJSONObject(i).getString("type"));
+						}
+						
+						
+						
+				
 						swrlEngine.createEngine();
 						swrlEngine.infer(contextModel.getOntologyPath());
 						
