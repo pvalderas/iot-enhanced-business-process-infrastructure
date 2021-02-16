@@ -73,10 +73,10 @@ public class EventManager {
 						JSONObject  contextData = new JSONObject(message);
 						String id=contextData.getString("id");
 						contextModel.addInstance("Device", id);
-						contextModel.setContextProp(id, "type", contextData.getString("type"));
+						contextModel.setContextProp(id, "type", contextData.getString("device"));
 						JSONArray props=contextData.getJSONArray("properties");
 						for(int i=0;i<props.length();i++){
-							contextModel.setContextProp(id, props.getJSONObject(i).getString("name"), props.getJSONObject(i).getString("type"));
+							contextModel.setContextProp(id, props.getJSONObject(i).getString("name"), props.getJSONObject(i).getString("value"));
 						}
 						
 						
