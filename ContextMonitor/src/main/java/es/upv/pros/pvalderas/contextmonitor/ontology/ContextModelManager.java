@@ -35,8 +35,7 @@ public class ContextModelManager{
 	
 	public final String  ontologyName= ContextOntology.getOntologyName();
 	public final String ontologyPath= ContextOntology.getOntologyPath(); 
-	
-	public final String prefixURI="http://www.pros.com/";	
+	public final String prefixURI= ContextOntology.getPrefixUri(); 
 	
 	public final String header = "PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n" +
 	"PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\n" +
@@ -346,13 +345,13 @@ public class ContextModelManager{
 	
 	public void addInstance(String classID, String individualID){
 		try {
-			dataset.begin( ReadWrite.WRITE);
+			//dataset.begin( ReadWrite.WRITE);
 			Resource cls=ontModel.getResource(prefixURI + classID);
 			ontModel.createIndividual(prefixURI + individualID, cls);
-			dataset.commit();
-		    dataset.close();    
+			//dataset.commit();
+		    //dataset.close();    
 		} finally {
-			dataset.end(); 
+			//dataset.end(); 
 		}
 	}
 		

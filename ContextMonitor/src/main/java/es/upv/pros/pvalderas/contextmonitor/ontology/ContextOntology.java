@@ -16,7 +16,7 @@ import org.springframework.core.io.ClassPathResource;
 	 
 	private static String ontologyName;
 	private static String ontologyPath;
-
+	private static String ontologyPrefix;
 
 	public static String getOntologyName() {
 		if(ontologyName==null){
@@ -31,6 +31,13 @@ import org.springframework.core.io.ClassPathResource;
 			ontologyPath=System.getProperty("user.dir")+ File.separator + getProperties().getProperty("contextOntology.path")+ File.separator;
 		}
 		return ontologyPath;
+	}
+	
+	public static String getPrefixUri() {
+		if(ontologyPrefix==null){
+			ontologyPrefix=getProperties().getProperty("contextOntology.prefix");
+		}
+		return ontologyPrefix;
 	}
 	 
 	private static Properties props;
