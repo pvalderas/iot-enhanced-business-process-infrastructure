@@ -345,13 +345,13 @@ public class ContextModelManager{
 	
 	public void addInstance(String classID, String individualID){
 		try {
-			//dataset.begin( ReadWrite.WRITE);
+			dataset.begin( ReadWrite.WRITE);
 			Resource cls=ontModel.getResource(prefixURI + classID);
 			ontModel.createIndividual(prefixURI + individualID, cls);
-			//dataset.commit();
-		    //dataset.close();    
+			dataset.commit();
+		    dataset.close();    
 		} finally {
-			//dataset.end(); 
+			dataset.end(); 
 		}
 	}
 		

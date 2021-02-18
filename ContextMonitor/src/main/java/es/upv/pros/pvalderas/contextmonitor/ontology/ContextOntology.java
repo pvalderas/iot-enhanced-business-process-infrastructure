@@ -10,7 +10,6 @@ import org.springframework.core.io.ClassPathResource;
 	public abstract class ContextOntology {
 	 	 
 	public abstract  Map<String, String> SWRLRules();
-	 
 	public abstract  Map<String, String> highLevelEvents();
 	 
 	 
