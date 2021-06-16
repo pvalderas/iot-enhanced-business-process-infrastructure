@@ -1,4 +1,4 @@
-package es.upv.pros.pvalderas.microservice.syncronous;
+package es.upv.pros.pvalderas.microservice.iotdevice;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

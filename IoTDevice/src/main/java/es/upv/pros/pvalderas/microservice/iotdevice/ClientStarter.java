@@ -1,4 +1,4 @@
-package es.upv.pros.pvalderas.microservice.syncronous;
+package es.upv.pros.pvalderas.microservice.iotdevice;
 
 import java.io.IOException;
 import java.lang.annotation.Annotation;
@@ -33,7 +33,7 @@ public class ClientStarter implements ApplicationRunner {
 		if(mainClass!=null){
 			String microservice=mainClass.getSimpleName();
 			
-			System.out.println("Setting up Syncronous Microservice "+microservice);
+			System.out.println("Setting up IoT Device "+microservice);
 				        
 			registerOperations(mainClass);
 			

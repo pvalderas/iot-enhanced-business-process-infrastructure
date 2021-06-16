@@ -36,7 +36,7 @@ The architectural elements that support our proposal are depicted in red. Thery 
 
 * Event bus: it supports the asynchronous communication required by the infrastructure based on a publish/subscribe patter. The RabbitMQ  queue-based message broker is currently supported. 
 
-* IoT microservices: they are the microservices in charge of controlling IoT devices. We support two type of interaction with IoT microservices: (1) Synchronously through REST invoations and (2) Asynchronously through publish/subscribe communicatio through the event bus.
+* IoT Devices: they are the microservices in charge of controlling IoT devices. We support two type of interaction with IoT microservices: (1) Synchronously through REST invoations and (2) Asynchronously through publish/subscribe communicatio through the event bus.
 
 In order to create the BP Controller, the Action Performer, the Context Manager and the Synchronous and Asychronous IoT microservices we provide the following tool-support.
 
@@ -119,14 +119,14 @@ eventBus:
   host: localhost
 ```
 
-# Creating a microservice to support an IoT device controlled by a synchronous REST API
+# Creating a microservice to support an IoT device
 
-To create an IoT microservice that interact with the Action Performed through synchronous REST invocations you can use Gradle to build the corresponding project in this repository and include it as a dependency of a Spring Boot Application. Then, you just need to annotate the main class with the ```@SyncronousMicroservice``` as presented bellow. This annotation must be configured with the class object of the microservice HTTP controller. Note also that the ```@SpringBootApplication``` annotation must be configured to find beans in the ```es.upv.pros.pvalderas.microservice.syncronous``` package as well as the package in which the HTTP controller of the microservice is implemented (```es.upv.pros.pvalderas.truckcontainer``` in the example below). In addition, the ```@EnableDiscoveryClient``` annotation is used to register the microservice in Eureka.
+To create an IoT microservice that interact with the Action Performed through synchronous REST invocations you can use Gradle to build the corresponding project in this repository and include it as a dependency of a Spring Boot Application. Then, you just need to annotate the main class with the ```@IoTDevice``` as presented bellow. This annotation must be configured with the class object of the microservice HTTP controller. Note also that the ```@SpringBootApplication``` annotation must be configured to find beans in the ```es.upv.pros.pvalderas.microservice.syncronous``` package as well as the package in which the HTTP controller of the microservice is implemented (```es.upv.pros.pvalderas.truckcontainer``` in the example below). In addition, the ```@EnableDiscoveryClient``` annotation is used to register the microservice in Eureka.
 
 ```java
 @EnableDiscoveryClient
-@SpringBootApplication(scanBasePackages = {"es.upv.pros.pvalderas.truckcontainer","es.upv.pros.pvalderas.microservice.syncronous"})
-@SyncronousMicroservice(serviceAPIClass=TruckContainerSensorHTTPController.class)
+@SpringBootApplication(scanBasePackages = {"es.upv.pros.pvalderas.truckcontainer","es.upv.pros.pvalderas.microservice.iotdevice"})
+@IoTDevice(serviceAPIClass=TruckContainerSensorHTTPController.class)
 public class TruckContainerSensor {
   public static void main(String[] args) {
     SpringApplication.run(TruckContainerSensor.class, args);
@@ -151,48 +151,6 @@ eureka:
     metadataMap:
       connectionType: synchronous
 ```
-
-# Creating a microservice to support an IoT device controlled by an asynchronous pub/sub broker
-
-To create an IoT microservice that interact with the Action Performer through a pub/sub communication you can use Gradle to build the corresponding project in this repository and include it as a dependency of a Spring Boot Application. Then, you just need to annotate the main class with the ```@AsyncronousMicroservice``` as presented bellow. This annotation must be configured with the class object of API that describe the operation provided by the microserive. Note also that the ```@SpringBootApplication``` annotation must be configured to find beans in the ```es.upv.pros.pvalderas.microservice.asynchronous``` package as well as the package in which the HTTP controller of the microservice is implemented (```es.upv.pros.pvalderas.refrigerator``` in the example below). In addition, the ```@EnableDiscoveryClient``` annotation is used to register the microservice in Eureka.
-
-```java
-@EnableDiscoveryClient
-@SpringBootApplication(scanBasePackages = {"es.upv.pros.pvalderas.refrigerator","es.upv.pros.pvalderas.microservice.asynchronous"})
-@AsynchronousMicroservice(serviceAPIClass=RefrigeratorControlSystemAPI.class)
-public class RefrigeratorControlSystem {
-  public static void main(String[] args) {
-    SpringApplication.run(RefrigeratorControlSystem.class, args);
-  }
-}
-```
-Next, you must create an application.yml file and define the name of the microservice (which is shown in the BPMN editor provided by the BPController), indicate its HTTP port, create the configuration of the service registry Eureka and the event bus, and define the url of the BPController used to complete BPMN tasks.
-
-```yml
-spring:
-  application:
-    name: Refrigerator
-    
-server:
-  port: 8092
-    
-eureka:
-  client:
-    serviceUrl:
-      defaultZone: http://localhost:2222/eureka
-  instance:
-    metadataMap:
-      connectionType: asynchronous
-
-eventBus:
-  type: rabbitmq
-  host: localhost
- 
-bpController:
-  serviceUrl: http://localhost:8081
-  asyncTaskPath: /process/asynctask/
-```
-
 
 # Using the infrastructure to create and execute an IoT-enhanced business proccess
 
