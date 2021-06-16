@@ -39,5 +39,5 @@ dependencies {
 }
 
 jar{
-    baseName = 'syncronousmicroservice'
+    baseName = 'iotdevice'
 }
