@@ -1,5 +1,4 @@
 include 'ActionPerformer'
-include 'AsynchronousMicroservice'
+include 'IoTDevice'
 include 'BPController'
 include 'ContextMonitor'
-include 'SyncronousMicroservice'
