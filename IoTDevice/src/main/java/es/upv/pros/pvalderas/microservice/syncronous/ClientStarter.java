@@ -28,7 +28,7 @@ public class ClientStarter implements ApplicationRunner {
     @Override
     public void run(ApplicationArguments args) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException, JSONException {
     	
-		Class mainClass=context.getBeansWithAnnotation(SyncronousMicroservice.class).values().iterator().next().getClass().getSuperclass();
+		Class mainClass=context.getBeansWithAnnotation(IoTDevice.class).values().iterator().next().getClass().getSuperclass();
 		 
 		if(mainClass!=null){
 			String microservice=mainClass.getSimpleName();
@@ -45,7 +45,7 @@ public class ClientStarter implements ApplicationRunner {
     
     private void registerOperations(Class mainClass) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException, JSONException {
         
-        Annotation classAnnotation= mainClass.getDeclaredAnnotation(SyncronousMicroservice.class);
+        Annotation classAnnotation= mainClass.getDeclaredAnnotation(IoTDevice.class);
         Class classAPI=(Class)classAnnotation.annotationType().getMethod("serviceAPIClass").invoke(classAnnotation);
         
         JSONArray list=new JSONArray();

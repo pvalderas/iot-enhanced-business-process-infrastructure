@@ -29,7 +29,7 @@ public class SPARQLEngine {
 	public ResultSet executeQuerySELECT(String queryString)
 	{
 		Query query = QueryFactory.create(queryString, Syntax.syntaxARQ ) ;		
-		QueryExecution qexec = QueryExecutionFactory.create(query, model) ;     
+		QueryExecution qexec = QueryExecutionFactory.create(query, model) ; 
 
 		ResultSet rs = qexec.execSelect() ; 		
 		return rs;

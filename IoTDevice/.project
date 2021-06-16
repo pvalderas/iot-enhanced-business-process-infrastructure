@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>AsynchronousMicroservice</name>
-	<comment>Project AsynchronousMicroservice created by Buildship.</comment>
+	<name>IoTDevice</name>
+	<comment>Project IoTDEvice created by Buildship.</comment>
 	<projects>
 	</projects>
 	<buildSpec>
