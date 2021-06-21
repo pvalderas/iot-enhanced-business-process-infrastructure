@@ -32,7 +32,7 @@ The architectural elements that support our proposal are depicted in red. Thery 
 
 * Action Performer: this microservice plays the role of middleware among the BP Controller, the Service Registry, and the business microservices. It publishes an API to which BPMN service tasks must be bind in order to execute an action. When a service tasks is executed by the BPMN engine of the BP Controller, this engine sends an execution request to the Action Performer, which interact with the Service Registry in order to know the invocation data of the required business microservice. Then, it calls the corresponding operation accessing the business microservice.
 
-* Context Manager: this microservice is in charge of registering to the event-based bus in order to access the context changes published by business microservices. When a context change happens, this microservice registers it into an OWL-based context ontology which is continously analyzed in order to generate high level events. These events are injected into the BP Controller. 
+* Context Monitor: this microservice is in charge of registering to the event-based bus in order to access the context changes published by business microservices. When a context change happens, this microservice registers it into an OWL-based context ontology which is continously analyzed in order to generate high level events. These events are injected into the BP Controller. 
 
 * Event bus: it supports the asynchronous communication required by the infrastructure based on a publish/subscribe patter. The RabbitMQ  queue-based message broker is currently supported. 
 
@@ -86,7 +86,7 @@ eventBus:
  
 # Creating an Action Performer
 
-To create a Global Composition Manager you can use Gradle to build the corresponding project in this repository and include it as a dependency of a Spring Boot Application. Then, you just need to annotate the main class with the ```@ActionPerformer``` as presented bellow. Note that the ```@SpringBootApplication``` annotation must be configured to find beans in the ```es.upv.pros.pvalderas.actionperformer.server``` package.
+To create an Action Performer you can use Gradle to build the corresponding project in this repository and include it as a dependency of a Spring Boot Application. Then, you just need to annotate the main class with the ```@ActionPerformer``` as presented bellow. Note that the ```@SpringBootApplication``` annotation must be configured to find beans in the ```es.upv.pros.pvalderas.actionperformer.server``` package.
 
 ```java
 @ActionPerformer
@@ -118,6 +118,41 @@ eventBus:
   type: rabbitmq
   host: localhost
 ```
+
+# Creating an Context Monitor
+
+To create a Context Monitor you can use Gradle to build the corresponding project in this repository and include it as a dependency of a Spring Boot Application. Then, you just need to annotate the main class with the ```@ContextMonitor``` as presented bellow. Note that the ```@SpringBootApplication``` annotation must be configured to find beans in the ```es.upv.pros.pvalderas.contextmonitor.ontology``` package.
+
+```java
+@ContextMonitor(contextOntology=PurchaseContextOntology.class)
+@SpringBootApplication(scanBasePackages = {"es.upv.pros.pvalderas.actionperformer.server"})
+public class ContextMonitorMain {
+  public static void main(String[] args) {
+    SpringApplication.run(ActionPerformerMain.class, args);
+  }   
+}
+```
+Next, you must create an application.yml file to name the microservice 'ActionPerformer' (mandatory name), indicate its HTTP port, and define the configuration of the service registry Eureka and the event bus.
+
+```yml
+spring:
+  application:
+    name: ContextMonitor
+    
+server:
+  port: 8083
+  
+bpController:
+    serviceUrl: http://localhost:8081
+    messagePath: /process/message
+
+eventBus:
+  type: rabbitmq
+  host: localhost
+ 
+contextOntology:
+  name: ContextOntology
+  path: models
 
 # Creating a microservice to support an IoT device
 
