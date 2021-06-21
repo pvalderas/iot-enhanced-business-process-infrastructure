@@ -36,7 +36,7 @@ The architectural elements that support our proposal are depicted in red. Thery 
 
 * Event bus: it supports the asynchronous communication required by the infrastructure based on a publish/subscribe patter. The RabbitMQ  queue-based message broker is currently supported. 
 
-* IoT Devices: they are the microservices in charge of controlling IoT devices through REST invoations.
+* IoT Devices: they are the microservices in charge of controlling IoT devices through REST calls.
 
 In order to create the BP Controller, the Action Performer, the Context Manager and the IoT Devices microservices we provide the following tool-support.
 
