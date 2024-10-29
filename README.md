@@ -190,3 +190,9 @@ eureka:
 # Using the infrastructure to create and execute an IoT-enhanced business proccess
 
 In [iot-enhanced-business-process-example](https://github.com/pvalderas/iot-enhanced-business-process-example) you can find the implementation of a case study based on the process of purchase orders.
+
+# Acknowledgement
+
+Grant MCIN/AEI/10.13039/501100011033 funded by: 
+
+<img src="./mcin.png" alt="Ministeria de Cienca e innovación" width="300px"> <img src="./aei.png" alt="Agencia Estatal de Investigación" width="100px"> 
